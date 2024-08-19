@@ -1,10 +1,13 @@
 import { type Server } from "bun"
 import { cryptogramSolveHandler } from "./src/cryptograms";
 import { jsonify } from "./src/util";
+import mongoose from "mongoose";
 
 const defaultResponse = () => {
   return jsonify({ error: "not found" }, { status: 404 })
 }
+
+mongoose.connect(process.env.MONGO_CONNECTION_STRING || '')
 
 const server = Bun.serve({
   port: 3000,

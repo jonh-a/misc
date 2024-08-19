@@ -17,3 +17,7 @@ export const getCorsHeaders = (
   'Access-Control-Allow-Methods': `${methods.join(", ")}`,
   'Access-Control-Allow-Headers': 'Content-Type',
 })
+
+export const round = (n: number) => {
+  return Math.round(n * 100) / 100
+} 
