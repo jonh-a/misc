@@ -1,5 +1,5 @@
 import { type Server } from "bun"
-import { jsonify, getCorsHeaders, round } from "./util"
+import { jsonify, getCorsHeaders } from "./util"
 import { Schema, model } from "mongoose"
 
 interface ISubmission {
@@ -53,7 +53,7 @@ export const cryptogramSolveHandler = async (request: Request, server: Server) =
       { status: 500, headers: CORS_HEADERS },
     )
 
-    const average = round(submissions
+    const average = Math.floor(submissions
       .map((submission: ISubmission) => submission.solveTime)
       .reduce((a, b) => a + b) / submissions.length
     )
