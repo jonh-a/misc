@@ -7,7 +7,7 @@ export const jsonify = (
     headers: { ...init?.headers, 'Content-Type': 'application/json' },
     status: init?.status ?? 200
   });
-}
+};
 
 export const getCorsHeaders = (
   methods: string[],
@@ -16,8 +16,8 @@ export const getCorsHeaders = (
   'Access-Control-Allow-Origin': `${origins ?? "*"}`,
   'Access-Control-Allow-Methods': `${methods.join(", ")}`,
   'Access-Control-Allow-Headers': 'Content-Type',
-})
+});
 
 export const round = (n: number) => {
-  return Math.round(n * 100) / 100
-} 
+  return Math.round(n * 100) / 100;
+}; 
