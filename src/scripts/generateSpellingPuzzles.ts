@@ -6,7 +6,7 @@
   bun run scripts/generateSpellingPuzzles.ts 5
 */
 
-interface Puzzle {
+export interface Puzzle {
   requiredLetter: string
   otherLetters: string[]
   panagrams: string[]
@@ -19,7 +19,7 @@ export const generateNDifferentPuzzles = async (n: number): Promise<Puzzle[]> =>
 };
 
 const readWordlist = async () => {
-  const f = Bun.file('../files/dice.txt');
+  const f = Bun.file('files/dice.txt');
   const words = (await f.text()).split('\n');
   return words;
 };
@@ -90,13 +90,15 @@ const getRandomLetters = (): string[] => {
     .slice(0, 7);
 };
 
-(async () => {
-  const numberOfPuzzles = Number(Bun.argv[2]);
-  if (!numberOfPuzzles || Number.isNaN(numberOfPuzzles)) {
-    console.error("Argument must be a number.");
-    process.exit(1);
-  }
+if (import.meta.main) {
+  (async () => {
+    const numberOfPuzzles = Number(Bun.argv[2]);
+    if (!numberOfPuzzles || Number.isNaN(numberOfPuzzles)) {
+      console.error("Argument must be a number.");
+      process.exit(1);
+    }
 
-  const puzzles = await generateNDifferentPuzzles(numberOfPuzzles);
-  console.log(puzzles);
-})();
+    const puzzles = await generateNDifferentPuzzles(numberOfPuzzles);
+    console.log(puzzles);
+  })();
+}
