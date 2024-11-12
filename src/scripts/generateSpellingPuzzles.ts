@@ -36,13 +36,20 @@ const generateSpellingPuzzle = (
 
   if (puzzles.includes(puzzle)) {
     console.debug(` > Found duplicate - regenerating...`);
-    return generateSpellingPuzzle(words, [...puzzles, puzzle], remainder);
+    return generateSpellingPuzzle(words, [...puzzles], remainder);
   }
 
   return generateSpellingPuzzle(words, [...puzzles, puzzle], remainder - 1);
 };
 
-const attemptValidLetterCombination = (words: string[]): Puzzle => {
+const attemptValidLetterCombination = (
+  words: string[],
+  attempt: number = 0
+): Puzzle => {
+  if (attempt > 10000) {
+    throw new Error('Failed to generate a valid puzzle after 10,000 attempts.');
+  }
+
   const letters = getRandomLetters();
   const [requiredLetter, ...otherLetters] = letters;
   const validWords = words.filter((word: string) => {
@@ -60,7 +67,7 @@ const attemptValidLetterCombination = (words: string[]): Puzzle => {
   if (panagrams.length >= 1 && validWords.length > 10) {
     return { requiredLetter, otherLetters, panagrams, validWords };
   }
-  return attemptValidLetterCombination(words);
+  return attemptValidLetterCombination(words, attempt + 1);
 };
 
 const getPanagrams = (letters: string[], words: string[]): string[] => {
@@ -75,8 +82,8 @@ const getPanagrams = (letters: string[], words: string[]): string[] => {
 };
 
 const getRandomLetters = (): string[] => {
-  return ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
-    'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+  return 'abcdefghijklmnopqrstuvwxyz'
+    .split('')
     .map((a) => ({ sort: Math.random(), value: a }))
     .sort((a, b) => a.sort - b.sort)
     .map((a) => a.value)
@@ -84,12 +91,12 @@ const getRandomLetters = (): string[] => {
 };
 
 (async () => {
-  const n = Number(Bun.argv[2]);
-  if (!n || Number.isNaN(n)) {
+  const numberOfPuzzles = Number(Bun.argv[2]);
+  if (!numberOfPuzzles || Number.isNaN(numberOfPuzzles)) {
     console.error("Argument must be a number.");
     process.exit(1);
   }
 
-  const puzzles = await generateNDifferentPuzzles(n);
+  const puzzles = await generateNDifferentPuzzles(numberOfPuzzles);
   console.log(puzzles);
 })();
