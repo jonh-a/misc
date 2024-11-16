@@ -1,6 +1,6 @@
 import { type Server } from "bun";
 import { cryptogramSolveHandler } from "./src/cryptograms";
-import { spellingGetHandler } from "./src/spelling/spelling";
+import { spellingGetHandler, spellingGuessHandler } from "./src/spelling/spelling";
 import { getCorsHeaders, jsonify } from "./src/util";
 import mongoose from "mongoose";
 
@@ -22,6 +22,7 @@ const server = Bun.serve({
     const pathname: string = new URL(request.url).pathname;
     switch (pathname) {
       case "/spelling": return spellingGetHandler(request);
+      case "/spelling/guess": return spellingGuessHandler(request);
       case "/cryptograms/solve": return cryptogramSolveHandler(request, server);
       default: return defaultResponse();
     }

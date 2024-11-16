@@ -18,3 +18,7 @@ export const PuzzleModel = model<Puzzle>(
     validWords: { type: [String], required: true },
   })
 );
+
+export interface PuzzleGuess {
+  word: string
+}
