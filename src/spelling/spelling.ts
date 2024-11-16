@@ -64,7 +64,7 @@ export const spellingGuessHandler = async (request: Request) => {
           validWordCount: puzzle.validWords.length,
         },
         { status: 200 },
-      )
+      );
     }
 
     if (puzzle.validWords.includes(word.toLowerCase())) {
@@ -75,7 +75,7 @@ export const spellingGuessHandler = async (request: Request) => {
           validWordCount: puzzle.validWords.length,
         },
         { status: 200 },
-      )
+      );
     }
 
     if (!puzzle.validWords.includes(word.toLowerCase())) {
@@ -86,7 +86,7 @@ export const spellingGuessHandler = async (request: Request) => {
           validWordCount: puzzle.validWords.length,
         },
         { status: 200 },
-      )
+      );
     }
 
     return jsonify(
@@ -94,7 +94,7 @@ export const spellingGuessHandler = async (request: Request) => {
         error: 'An unexpected error occurred.',
       },
       { status: 200 },
-    )
+    );
   } catch (e) {
     console.log(e);
     return jsonify(
@@ -102,4 +102,4 @@ export const spellingGuessHandler = async (request: Request) => {
       { status: 500, headers: CORS_HEADERS },
     );
   }
-}
+};

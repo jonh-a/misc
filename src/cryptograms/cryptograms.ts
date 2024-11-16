@@ -1,5 +1,5 @@
 import { type Server } from "bun";
-import { jsonify, getCorsHeaders } from "./util";
+import { jsonify, getCorsHeaders } from "../util";
 import { Schema, model } from "mongoose";
 
 interface ISubmission {

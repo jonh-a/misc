@@ -1,5 +1,5 @@
 import { type Server } from "bun";
-import { cryptogramSolveHandler } from "./src/cryptograms";
+import { cryptogramSolveHandler } from "./src/cryptograms/cryptograms";
 import { spellingGetHandler, spellingGuessHandler } from "./src/spelling/spelling";
 import { getCorsHeaders, jsonify } from "./src/util";
 import mongoose from "mongoose";
