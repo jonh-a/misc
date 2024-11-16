@@ -1,17 +1,12 @@
 /*
-  Generate N number of spelling puzzles.
+  Generate N number of spelling puzzles as JSON output.
 
   Example:
-  # To create 5 puzzles
+  # To create 5 puzzles.
   bun run scripts/generateSpellingPuzzles.ts 5
 */
 
-export interface Puzzle {
-  requiredLetter: string
-  otherLetters: string[]
-  panagrams: string[]
-  validWords: string[]
-}
+import { type Puzzle } from "../definitions";
 
 export const generateNDifferentPuzzles = async (n: number): Promise<Puzzle[]> => {
   const words = await readWordlist();
@@ -99,6 +94,6 @@ if (import.meta.main) {
     }
 
     const puzzles = await generateNDifferentPuzzles(numberOfPuzzles);
-    console.log(puzzles);
+    console.log(JSON.stringify(puzzles, null, 2));
   })();
 }

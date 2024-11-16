@@ -12,6 +12,9 @@
   "peerDependencies": {
     "typescript": "^5.0.0"
   },
+  "scripts": {
+    "start": "bun run server.ts"
+  },
   "dependencies": {
     "mongoose": "^8.5.3"
   }
