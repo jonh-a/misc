@@ -1,3 +1,12 @@
+/*
+  Add dates to a JSON file of puzzles and insert them into the database.
+
+  Example:
+  # Add dates starting with 2024-01-01 to a list of puzzles 
+  # and insert them into the spelling_puzzles collection
+  bun run src/spelling/scripts/writePuzzlesToDatabase.ts puzzles.json 2024-01-01
+*/
+
 import { type Puzzle, PuzzleModel } from "../definitions";
 import mongoose from "mongoose";
 

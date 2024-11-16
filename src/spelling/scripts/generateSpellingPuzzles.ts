@@ -2,8 +2,8 @@
   Generate N number of spelling puzzles as JSON output.
 
   Example:
-  # To create 5 puzzles.
-  bun run scripts/generateSpellingPuzzles.ts 5
+  # Create 5 puzzles and save to puzzles.json
+  bun run src/scripts/generateSpellingPuzzles.ts 5 > puzzles.json
 */
 
 import { type Puzzle } from "../definitions";
