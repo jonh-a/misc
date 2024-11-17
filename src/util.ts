@@ -20,4 +20,11 @@ export const getCorsHeaders = (
 
 export const round = (n: number) => {
   return Math.round(n * 100) / 100;
-}; 
+};
+
+export class UserFacingError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = 'UserFacingError';
+  }
+}
