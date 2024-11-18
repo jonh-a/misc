@@ -11,11 +11,11 @@ export const spellingGetHandler = async (request: Request) => {
       { status: 400 },
     );
 
-    const { searchParams } = new URL(request.url)
-    const dateInput = searchParams.get('date') || ''
-    const date = getDateString(dateInput)
+    const { searchParams } = new URL(request.url);
+    const dateInput = searchParams.get('date') || '';
+    const date = getDateString(dateInput);
     const puzzle = await PuzzleModel.findOne({ date }) as Puzzle;
-    if (!puzzle) throw new UserFacingError(`Puzzle not found for date ${dateInput}.`)
+    if (!puzzle) throw new UserFacingError(`Puzzle not found for date ${dateInput}.`);
 
     return jsonify(
       {
@@ -63,11 +63,11 @@ export const spellingGuessHandler = async (request: Request) => {
       );
     }
 
-    const { searchParams } = new URL(request.url)
-    const dateInput = searchParams.get('date') || ''
-    const date = getDateString(dateInput)
+    const { searchParams } = new URL(request.url);
+    const dateInput = searchParams.get('date') || '';
+    const date = getDateString(dateInput);
     const puzzle = await PuzzleModel.findOne({ date }) as Puzzle;
-    if (!puzzle) throw new UserFacingError(`Puzzle not found for date ${dateInput}.`)
+    if (!puzzle) throw new UserFacingError(`Puzzle not found for date ${dateInput}.`);
 
     if (puzzle.panagrams.includes(word.toLowerCase())) {
       return jsonify(
@@ -132,7 +132,7 @@ const getDateString = (dateInput: string): string => {
   if (!dateInput) date = new Date();
   else date = new Date(dateInput);
 
-  if (isNaN(date.getTime())) throw new UserFacingError('Invalid date provided.')
+  if (isNaN(date.getTime())) throw new UserFacingError('Invalid date provided.');
 
   return `${date.getUTCFullYear()}-${date.getUTCMonth() + 1}-${date.getUTCDate()}`;
-}
+};
